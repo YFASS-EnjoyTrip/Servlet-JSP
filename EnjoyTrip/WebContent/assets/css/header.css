@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: "TheJamsil5Bold";
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  line-height: 70px;
+  z-index: 1;
+}
+
+.header-home {
+  font-size: 40px;
+}
+
+#header-title {
+  color: #9cdce4;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 0 10px 5px gray;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
