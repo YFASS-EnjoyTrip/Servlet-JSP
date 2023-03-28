@@ -26,7 +26,7 @@
 	margin-top: 10px;
 }
 
-#userId, #userpwd, #userName {
+.login-value, .signup-value {
   height: 30px;
   border-radius: 5px;
   width: 260px;
@@ -36,6 +36,14 @@
   margin-bottom: 10px;
   cursor: pointer;
 
+}
+
+.text-ok {
+	color : #87ceeb;
+}
+
+.text-danger {
+	color : #da8383;
 }
 
 #signup-info {

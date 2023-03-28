@@ -1,6 +1,7 @@
 package com.ssafy.enjoytrip.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,15 +32,19 @@ public class UserController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String action = req.getParameter("action");
+		if (action == null || "".equals(action)) action = "main";
 		
 		String path = "";
 		switch (action) {
 		case "idcheck":
-			idcheck(req, res);
+			int cnt = idcheck(req, res);
+			res.setContentType("text/html charSet=utf-8");
+			PrintWriter out = res.getWriter();
+			out.print(cnt);
 			break;
 		case "signup":
-			signup(req, res);
-			res.sendRedirect(req.getContextPath());
+			path = signup(req, res);
+			res.sendRedirect(req.getContextPath() + path);
 			break;
 
 		default:
@@ -60,14 +65,22 @@ public class UserController extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+			return "/index.jsp";
 		}
 		
-		return "";
+		return "/index.jsp";
 	}
 
-	private void idcheck(HttpServletRequest req, HttpServletResponse res) {
-		
+	private int idcheck(HttpServletRequest req, HttpServletResponse res) {
+		try {
+			String id = req.getParameter("userId");
+			if(us.idCheck(id) == 1) return 1;			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return 0;
+	
 	}
 
 

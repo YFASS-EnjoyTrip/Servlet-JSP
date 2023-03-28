@@ -2,6 +2,7 @@ package com.ssafy.enjoytrip.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.ssafy.enjoytip.model.User;
@@ -43,6 +44,23 @@ public class UserDaoImpl implements UserDao {
 	public User login(String id, String pw) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int findUserById(String id) throws SQLException {
+		try (
+				Connection con = db.getConnection();
+				PreparedStatement pstmt = con.prepareStatement
+				(
+					"select id, nickname from user where id = ?"
+				)
+			)
+		{
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) return 1;	
+		}
+		return 0;
 	}
 	
 
