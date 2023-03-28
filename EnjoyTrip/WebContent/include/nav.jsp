@@ -4,7 +4,7 @@
 	<nav class="header-nav">
 		<div>
 			<a class="header-home" href="index.html"> <span id="header-title">SSAFY</span>
-				<sapn>TRIP</sapn>
+				<span>TRIP</span>
 			</a>
 		</div>
 		<div class="nav-menu">

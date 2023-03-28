@@ -11,11 +11,12 @@ window.addEventListener("load", function () {
     modal2.style.display = "none";
   });
   
-  window.onclick = function (event) {
-    if (event.target == modal2) {
-      modal2.style.display = "none";
-    }
-  };
+  window.addEventListener('click', function (event) {
+	  if (event.target == modal2) {
+		  modal2.style.display = "none";
+	  }
+  });
+  
   
   // 로그인 버튼 이벤트
   let loginBtns = document.getElementsByClassName("login-btn");

@@ -52,7 +52,6 @@ window.addEventListener("load", function () {
 	      eleDiv2.appendChild(eleInfo);
 	      eleDiv.appendChild(eleDiv2);
 	      ele.appendChild(eleDiv);
-	      console.log(ele);
 	    }
 	  }
 });

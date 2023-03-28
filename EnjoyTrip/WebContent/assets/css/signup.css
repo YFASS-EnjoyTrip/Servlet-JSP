@@ -13,21 +13,29 @@
 
 #signup-modalBody {
   width: 320px;
-  height: 400px;
+  height: 500px;
   padding: 30px 30px;
   margin: 100px auto;
-  border: 1px solid #777;
   background-color: white;
   border-radius: 20px;
 }
 
-#input-box {
+.form-label {
+	display : inline-block;
+	width:200px;
+	margin-top: 10px;
+}
+
+#userId, #userpwd, #userName {
   height: 30px;
-  border-radius: 10px;
-  width: 250px;
-  margin-right: 200px;
+  border-radius: 5px;
+  width: 260px;
+  text-indent: 10px;
+ 
   margin-top: 5px;
+  margin-bottom: 10px;
   cursor: pointer;
+
 }
 
 #signup-info {
@@ -47,8 +55,9 @@
 #signup-submit {
   width: 200px;
   height: 40px;
-
-  margin: 35px 30px;
+	
+  margin-top: 30px;
+  margin-left: 30px;
   background-color: #9cdce4;
   border: #9cdce4;
   border-radius: 10px;
