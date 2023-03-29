@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <header>
 	<nav class="header-nav">
@@ -8,14 +9,19 @@
 			</a>
 		</div>
 		<div class="nav-menu">
-			<!-- 로그인 전 -->
-			<a id="login" class="nav-menu-item" style="display: block" href="#">로그인</a>
-			<a id="signup" class="nav-menu-item" style="display: block" href="#">회원가입</a>
-
-			<!-- 로그인 후 -->
-			<a class="nav-menu-item" style="display: block" href="#">로그아웃</a> <a
-				class="nav-menu-item" style="display: block" href="memberPage.html">마이페이지</a>
-			<a class="nav-menu-item" style="display: block" href="#">고객센터</a>
+			<c:if test="${empty userInfo}">
+				<!-- 로그인 전 -->
+				<a id="login" class="nav-menu-item" style="display: block" href="#">로그인</a>
+				<a id="signup" class="nav-menu-item" style="display: block" href="#">회원가입</a>
+			</c:if>
+			<c:if test="${not empty userInfo}">
+				<!-- 로그인 후 -->
+				<strong>${userInfo.nickName} 님 안녕하세요.</strong>
+				<a class="nav-menu-item" style="display: block" href="#">로그아웃</a>
+				<a class="nav-menu-item" style="display: block"
+					href="memberPage.html">마이페이지</a>
+				<a class="nav-menu-item" style="display: block" href="#">고객센터</a>
+			</c:if>
 		</div>
 	</nav>
 </header>

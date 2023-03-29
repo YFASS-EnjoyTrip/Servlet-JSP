@@ -42,8 +42,30 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User login(String id, String pw) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		try (
+				Connection con = db.getConnection();
+				PreparedStatement pstmt = con.prepareStatement
+				(
+					"select id, nickname from user where id = ? and pw = ?"
+				)
+			)
+		{
+			int idx = 0;
+			pstmt.setString(++idx, id);
+			pstmt.setString(++idx, pw);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				User user = new User();
+				
+				user.setId(rs.getString("id"));
+				user.setNickName(rs.getString("nickname"));
+				
+				return user;
+			}
+			return null;
+		}
 	}
 
 	@Override

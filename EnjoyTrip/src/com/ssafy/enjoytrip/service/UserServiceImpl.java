@@ -26,4 +26,9 @@ public class UserServiceImpl implements UserService {
 	public int idCheck(String id) throws Exception {
 		return dao.findUserById(id);
 	}
+
+	@Override
+	public User login(String id, String pw) throws Exception {
+		return dao.login(id, pw);
+	}
 }

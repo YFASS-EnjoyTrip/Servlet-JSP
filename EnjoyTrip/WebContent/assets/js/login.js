@@ -19,10 +19,18 @@ window.addEventListener("load", function () {
   
   
   // 로그인 버튼 이벤트
-  let loginBtns = document.getElementsByClassName("login-btn");
-  for (let btn of loginBtns) {
-    btn.addEventListener("click", () => {
-      alert("아직 준비중인 기능입니다.");
-    });
-  }
+  let loginBtns = document.getElementById("login-submit");
+  
+  loginBtns.addEventListener("click", () => {
+	  if (!document.querySelector("#loginId").value) {
+          alert("아이디 입력!!");
+          return;
+        } else if (!document.querySelector("#loginPwd").value) {
+          alert("비밀번호 입력!!");
+          return;
+        } else {
+          form.submit();
+        }
+  })
+  
 });

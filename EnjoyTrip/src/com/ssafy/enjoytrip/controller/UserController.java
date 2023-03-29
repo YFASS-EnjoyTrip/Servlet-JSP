@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ssafy.enjoytip.model.User;
 import com.ssafy.enjoytrip.service.UserService;
@@ -36,6 +37,9 @@ public class UserController extends HttpServlet {
 		
 		String path = "";
 		switch (action) {
+		case "main":
+			req.getRequestDispatcher("/index.jsp").forward(req, res);
+			break;
 		case "idcheck":
 			int cnt = idcheck(req, res);
 			res.setContentType("text/html charSet=utf-8");
@@ -46,11 +50,34 @@ public class UserController extends HttpServlet {
 			path = signup(req, res);
 			res.sendRedirect(req.getContextPath() + path);
 			break;
-
+		case "login" :
+			path = login(req, res);
+			res.sendRedirect(req.getContextPath() + path);
+			break;
 		default:
 			break;
 		}
 	
+	}
+
+	private String login(HttpServletRequest req, HttpServletResponse res) {
+		try {
+			String id = req.getParameter("userId");
+			String pw = req.getParameter("userPwd");
+			User user = us.login(id, pw);
+			
+			if (user != null) {
+				HttpSession session = req.getSession();
+				session.setAttribute("userInfo", user);
+			} else {
+				return "";
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+		
+		return "/user";
 	}
 
 	private String signup(HttpServletRequest req, HttpServletResponse res) {
@@ -68,7 +95,7 @@ public class UserController extends HttpServlet {
 			return "/index.jsp";
 		}
 		
-		return "/index.jsp";
+		return "/user?action=main";
 	}
 
 	private int idcheck(HttpServletRequest req, HttpServletResponse res) {
