@@ -23,6 +23,20 @@ public class MainController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String action = req.getParameter("action");
+		
+		if (action == null || "".equals(action)) action = "main";
+		
+		String path = "";
+		switch (action) {
+		case "main":
+			req.getRequestDispatcher("/index.jsp").forward(req, res);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 
 	

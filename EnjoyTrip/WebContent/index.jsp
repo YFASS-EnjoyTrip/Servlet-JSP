@@ -89,6 +89,25 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- swiper menu2 주요 행사 -->
+	<div class="swiper-title">
+		<span id="swiper-title-key">관심 TOP!</span> <span>여행지 & 행사</span>
+	</div>
+	<div class="main-swiper-ank">
+		<div class="main-swiper">
+			<div class="swiper-button-prev swiper2_prev">
+				<img id="left-arrow1" src="${commonImg}/left-arrow.png" width="30px" />
+			</div>
+			<div class="swiper-container2 base-slider">
+				<div class="swiper-wrapper" id="swiper-wrapper"></div>
+			</div>
+			<div class="swiper-button-next swiper2_next">
+				<img id="right-arrow1" src="${commonImg}/right-arrow.png"
+					width="30px" />
+			</div>
+		</div>
+	</div>
 
 	<%@ include file="/user/signup.jsp"%>
 	<%@ include file="/user/login.jsp"%>

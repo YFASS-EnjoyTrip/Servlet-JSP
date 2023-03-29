@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="${commonCss}/footer.css" />
 <link rel="stylesheet" href="${commonCss}/signup.css" />
 <link rel="stylesheet" href="${commonCss}/login.css" />
+<link rel="stylesheet" href="${commonCss}/memberPage.css" />
+<link rel="stylesheet" href="${commonCss}/search.css" />
 
 <style>
 @font-face {

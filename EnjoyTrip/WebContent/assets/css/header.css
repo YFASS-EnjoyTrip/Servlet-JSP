@@ -37,6 +37,14 @@ header {
   width: 500px;
 }
 
+ul {
+
+}
+
+li {
+	float : left;
+	margin-left : 20px;
+}
 a {
   text-decoration: none;
   color: black;

@@ -54,10 +54,26 @@ public class UserController extends HttpServlet {
 			path = login(req, res);
 			res.sendRedirect(req.getContextPath() + path);
 			break;
+		case "logout" :
+			path = logout(req, res);
+			res.sendRedirect(req.getContextPath() + path);
+			break;
+		case "mypage" :
+			path = mypage(req, res);
+			req.getRequestDispatcher(path).forward(req, res);
 		default:
 			break;
 		}
 	
+	}
+
+	private String mypage(HttpServletRequest req, HttpServletResponse res) {
+		return "/user/userPage.jsp";
+	}
+
+	private String logout(HttpServletRequest req, HttpServletResponse res) {
+		req.getSession().invalidate();
+		return "";
 	}
 
 	private String login(HttpServletRequest req, HttpServletResponse res) {
