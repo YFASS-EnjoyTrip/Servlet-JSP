@@ -1,8 +1,8 @@
 package com.ssafy.enjoytrip.service;
 
-import com.ssafy.enjoytip.model.User;
 import com.ssafy.enjoytrip.dao.UserDao;
 import com.ssafy.enjoytrip.dao.UserDaoImpl;
+import com.ssafy.enjoytrip.model.User;
 
 public class UserServiceImpl implements UserService {
 

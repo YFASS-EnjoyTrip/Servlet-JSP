@@ -1,4 +1,4 @@
-package com.ssafy.enjoytip.model;
+package com.ssafy.enjoytrip.model;
 
 public class User {
 	private String id;

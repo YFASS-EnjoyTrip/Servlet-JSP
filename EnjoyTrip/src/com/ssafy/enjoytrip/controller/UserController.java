@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ssafy.enjoytip.model.User;
+import com.ssafy.enjoytrip.model.User;
 import com.ssafy.enjoytrip.service.UserService;
 import com.ssafy.enjoytrip.service.UserServiceImpl;
 
