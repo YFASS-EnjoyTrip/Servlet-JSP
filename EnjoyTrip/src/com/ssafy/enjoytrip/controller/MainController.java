@@ -8,11 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ssafy.enjoytrip.service.MainService;
+import com.ssafy.enjoytrip.service.MainServiceImpl;
+
 @WebServlet("/main")
 public class MainController extends HttpServlet {
+	
+	private MainService ms;
 
 	@Override
 	public void init() throws ServletException {
+		ms = MainServiceImpl.getInstance();
 	}
 
 	@Override
@@ -30,7 +36,8 @@ public class MainController extends HttpServlet {
 		String path = "";
 		switch (action) {
 		case "main":
-			req.getRequestDispatcher("/index.jsp").forward(req, res);
+			path = getTopInfo(req, res);
+			req.getRequestDispatcher(path).forward(req, res);
 			break;
 		case "search":
 			req.getRequestDispatcher("/service/search.jsp").forward(req, res);
@@ -39,6 +46,17 @@ public class MainController extends HttpServlet {
 			break;
 		}
 		
+	}
+
+	private String getTopInfo(HttpServletRequest req, HttpServletResponse res) {
+		try {
+			req.setAttribute("items", ms.getTopInfo());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/index.jsp";
+		}
+		
+		return "/index.jsp";
 	}
 
 	

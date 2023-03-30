@@ -12,9 +12,10 @@
 	<%@ include file="/include/nav.jsp"%>
 	<main> <!-- 메인 navigator start -->
 	<div class="main-nav">
-		<a href="${root}/navigator?action=searchTrip" class="main-nav-item">여행지 검색</a> <a href=""
-			class="main-nav-item">여행 플래너</a> <a href="" class="main-nav-item">핫
-			플레이스</a> <a href="" class="main-nav-item">자유 게시판</a>
+		<a href="${root}/navigator?action=searchTrip" class="main-nav-item">여행지
+			검색</a> <a href="" class="main-nav-item">여행 플래너</a> <a href=""
+			class="main-nav-item">핫 플레이스</a> <a href="" class="main-nav-item">자유
+			게시판</a>
 	</div>
 	<!-- 메인 navigator end --> <!-- swiper 메뉴 1 -->
 	<div class="swiper-title">
@@ -89,8 +90,8 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- swiper menu2 주요 행사 -->
+
+	<!-- swiper menu3 관심 rate -->
 	<div class="swiper-title">
 		<span id="swiper-title-key">관심 TOP!</span> <span>여행지 & 행사</span>
 	</div>
@@ -100,7 +101,15 @@
 				<img id="left-arrow1" src="${commonImg}/left-arrow.png" width="30px" />
 			</div>
 			<div class="swiper-container2 base-slider">
-				<div class="swiper-wrapper" id="swiper-wrapper"></div>
+				<div class="swiper-wrapper" id="swiper-wrapper">
+					<c:forEach var="TopEvent" items="${items}">
+						<div class="swiper-slide">
+							<div class="main-event-item">
+								<img class="rate-item-img" src="${TopEvent.image}" />
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 			<div class="swiper-button-next swiper2_next">
 				<img id="right-arrow1" src="${commonImg}/right-arrow.png"
@@ -109,7 +118,7 @@
 		</div>
 	</div>
 
-	
-	</main>
+	<%@ include file="/user/signup.jsp"%> <%@ include
+		file="/user/login.jsp"%> </main>
 
 	<%@ include file="/include/footer.jsp"%>

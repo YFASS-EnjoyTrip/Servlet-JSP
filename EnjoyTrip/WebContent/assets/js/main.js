@@ -9,6 +9,7 @@ window.addEventListener("load", function () {
 
 	    return year + month + day;
 	}
+	
 	let areaUrl = `https://apis.data.go.kr/B551011/KorService1/searchFestival1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&eventStartDate=${getToday()}`;
   
 	fetch(areaUrl)
