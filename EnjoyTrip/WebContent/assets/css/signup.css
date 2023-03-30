@@ -13,11 +13,14 @@
 
 #signup-modalBody {
   width: 320px;
-  height: 500px;
   padding: 30px 30px;
   margin: 100px auto;
   background-color: white;
   border-radius: 20px;
+}
+
+#signup-title > h1 {
+	font-size: 32px;
 }
 
 .form-label {

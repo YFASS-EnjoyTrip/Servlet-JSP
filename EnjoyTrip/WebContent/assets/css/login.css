@@ -13,12 +13,11 @@
 
 #login-modalBody {
   width: 320px;
-  height: 450px;
   padding: 30px 30px;
   margin: 100px auto;
   border: 1px solid #777;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 #input-box {
@@ -36,6 +35,10 @@
 
 #login-title {
   display: flex;
+}
+
+#login-title > h1 {
+	font-size: 32px;
 }
 
 #login-modal-close {

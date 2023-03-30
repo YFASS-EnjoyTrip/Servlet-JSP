@@ -32,7 +32,9 @@ public class MainController extends HttpServlet {
 		case "main":
 			req.getRequestDispatcher("/index.jsp").forward(req, res);
 			break;
-
+		case "search":
+			req.getRequestDispatcher("/service/search.jsp").forward(req, res);
+			break;
 		default:
 			break;
 		}

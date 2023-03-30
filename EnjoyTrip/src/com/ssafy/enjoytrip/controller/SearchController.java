@@ -47,7 +47,7 @@ public class SearchController extends HttpServlet {
 		
 		String path = "";
 		// "지역별여행지" 리다이렉션
-		if("serchTrip".equals(action)) {
+		if("searchTrip".equals(action)) {
 			path = getInfo(request, response);
 			forward(request, response, path);
 		} 
@@ -75,10 +75,10 @@ public class SearchController extends HttpServlet {
 			List<SearchInfoDto> tripInfo = searchDao.getAttrInfo(sido, gugun, type, keyword);
 			request.setAttribute("attrinfo", tripInfo);
 			
-			return "/product/search.jsp";
+			return "/service/search.jsp";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/product/search.jsp";
+			return "/service/search.jsp";
 		}
 	}
 
@@ -89,8 +89,8 @@ public class SearchController extends HttpServlet {
 			session.setAttribute("cities", searchDao.getCities());  // 시 정보는 Main이니 Session 유지.
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/product/search.jsp";
+			return "/service/search.jsp";
 		}
-		return "/product/search.jsp";
+		return "/service/search.jsp";
 	}
 }

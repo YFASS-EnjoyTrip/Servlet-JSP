@@ -12,7 +12,7 @@
 	<%@ include file="/include/nav.jsp"%>
 	<main> <!-- 메인 navigator start -->
 	<div class="main-nav">
-		<a href="search.html" class="main-nav-item">여행지 검색</a> <a href=""
+		<a href="${root}/navigator?action=searchTrip" class="main-nav-item">여행지 검색</a> <a href=""
 			class="main-nav-item">여행 플래너</a> <a href="" class="main-nav-item">핫
 			플레이스</a> <a href="" class="main-nav-item">자유 게시판</a>
 	</div>

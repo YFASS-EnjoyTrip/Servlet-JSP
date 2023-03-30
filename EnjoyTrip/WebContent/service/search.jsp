@@ -152,84 +152,29 @@
 					</c:forEach>
 				</c:if>
 			</div>
-			<div class="row row-cols-3 g-4" id="cardlist"></div>
-			<!-- DB에서 가져온 관광지 정보는 attrinfo에 담겨져 있으므로 이를 foreach로 꺼내와 출력 -->
-			<c:forEach var="attr" items="${attrinfo}">
-				<div class="row row-cols-3 g-4" id="cardlist"></div>
-				<div class="col"
-					onclick="moveCenter(${attr.latitude}, ${attr.longitude});">
-					<div class="card">
-						<div class="card-hov">
-							<img src="${attr.imgUrl}" style="height: 280px"
-								class="card-img-top"
-								onerror="this.onerror=null; this.src='img/blank2.png';">
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">${attr.title}</h5>
-							<p class="card-text">${attr.address}${attr.address2}</p>
+
+			<div class="row row-cols-3 g-4" id="cardlist">
+				<!-- DB에서 가져온 관광지 정보는 attrinfo에 담겨져 있으므로 이를 foreach로 꺼내와 출력 -->
+				<c:forEach var="attr" items="${attrinfo}">
+					<div class="col"
+						onclick="moveCenter(${attr.latitude}, ${attr.longitude});">
+						<div class="card">
+							<div class="card-hov">
+								<img src="${attr.imgUrl}" style="height: 280px"
+									class="card-img-top"
+									onerror="this.onerror=null; this.src='${commonImg}/blank2.png';">
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">${attr.title}</h5>
+								<p class="card-text">${attr.address}${attr.address2}</p>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
+
+		<%@ include file="/user/signup.jsp"%>
+		<%@ include file="/user/login.jsp"%>
 	</div>
 	<%@ include file="/include/footer.jsp"%>
-</body>
-
-
-<script>
-		//시 정보 선택 시 발생하는 구군 항목 업데이트
-	document.querySelector("#search-city").addEventListener("change", function () {
-	  	   let seleted_code = this[this.selectedIndex].value;
-	  	   if (seleted_code) {
-	  	       getRegionDetail(seleted_code);
-	  	   }
-	  });
-
-	// "도시" 정보를 선택하면 이벤트로 발생하는 "지역구" 정보 가져오기
-	function getRegionDetail(data) {
-		let Region_Code_T10_2 = "https://apis.data.go.kr/B551011/KorService1/areaCode1?"
-          	+ "serviceKey=${serviceKey}"
-          	+ "&numOfRows=100"
-          	+ "&MobileOS=ETC"
-          	+ "&MobileApp=AppTest"
-          	+ "&_type=json"
-          	+ "&areaCode=" + data;
-
-      	fetch(Region_Code_T10_2).then((response) => response.json())
-          .then((text) => {
-              let RDetails = text.response.body.items.item;
-              let TagSet = "";
-              let Select_div = document.querySelector("#search-gugun");
-
-              if (RDetails) {
-                  RDetails.forEach(function (city) {
-                      let Rcode = city.code;
-                      let Rname = city.name;
-
-                      TagSet += "<option value=" + Rcode + ">" + Rname + "</option>";
-                  });
-              }
-              Select_div.innerHTML = TagSet;
-          });
-  	}
-  	  
-  
-    // 관광지 정보 가져오기 이벤트 ("검색" 버튼 이벤트) --> DB select 조건에 필요한 매개변수 담아서 던짐.
-    document.getElementById("btn-search").addEventListener("click", () => {
-    	
-    	let sidoCode = document.querySelector("#search-city").value;
-    	let gugunCode = document.querySelector("#search-gugun").value;
-    	let typeCode = document.querySelector("#search-content-id").value;
-      	let form = document.querySelector("#form-search");
-      	let keyword = document.querySelector("#search-keyword").value;
-      	
-        form.setAttribute("action", "${root}/navigator?action=showmap&sido="+sidoCode+"&gugun="+gugunCode+"&type="+typeCode+"&keyword="+keyword);
-        form.submit();
-    });
-    	
-    function moveCenter(lat, lng) {
-      map.setCenter(new kakao.maps.LatLng(lat, lng));
-    }
-</script>
-</html>
