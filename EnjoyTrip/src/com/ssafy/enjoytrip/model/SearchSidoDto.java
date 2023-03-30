@@ -2,7 +2,7 @@ package com.ssafy.enjoytrip.model;
 
 import java.io.Serializable;
 
-public class SerachSidoDto implements Serializable{
+public class SearchSidoDto implements Serializable{
 	private int sidoCode;
 	private String sidoName;
 	

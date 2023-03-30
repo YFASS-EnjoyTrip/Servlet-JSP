@@ -109,8 +109,6 @@
 		</div>
 	</div>
 
-	<%@ include file="/user/signup.jsp"%>
-	<%@ include file="/user/login.jsp"%>
 	
 	</main>
 

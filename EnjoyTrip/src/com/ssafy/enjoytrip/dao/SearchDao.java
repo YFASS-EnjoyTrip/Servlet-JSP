@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ssafy.enjoytrip.model.SearchSidoDto;
 import com.ssafy.enjoytrip.model.SearchInfoDto;
-import com.ssafy.enjoytrip.model.SerachSidoDto;
 import com.ssafy.enjoytrip.util.DBUtil;
-
 
 public class SearchDao {
 	private DBUtil db;
@@ -26,17 +25,17 @@ public class SearchDao {
 	}
 	
 	// 시 정보 가져오기
-	public List<SerachSidoDto> getCities() throws SQLException {
+	public List<SearchSidoDto> getCities() throws SQLException {
 		try (
 			Connection conn = db.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(
 					"select * from sido"
 					);
 		) {
-			List<SerachSidoDto> list= new ArrayList<>();
+			List<SearchSidoDto> list= new ArrayList<>();
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				SerachSidoDto city = new SerachSidoDto();
+				SearchSidoDto city = new SearchSidoDto();
 				city.setSidoCode(rs.getInt("sido_code"));
 				city.setSidoName(rs.getString("sido_name"));
 				
@@ -53,6 +52,7 @@ public class SearchDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String newKey = "'%" + keyword + "%'";
 		
 		try {
 			conn = db.getConnection();
@@ -61,47 +61,8 @@ public class SearchDao {
 			sql.append("title, addr1, addr2, first_image, latitude, longitude \n");
 			sql.append("from attraction_info \n");
 			sql.append("where sido_code="+sido+" and gugun_code="+gugun+" and content_type_id="+type + " ");
-			sql.append("and ((title LIKE '%" + keyword + "%') or (addr1 LIKE '%" + keyword + "%') or (addr2 LIKE '%" + keyword + "%'))");
-//			
-			pstmt = conn.prepareStatement(sql.toString());
-			rs = pstmt.executeQuery();
-				
-			while(rs.next()) {
-				SearchInfoDto Info = new SearchInfoDto();
-				Info.setSidoCode(rs.getInt("sido_code"));
-				Info.setContentId(rs.getInt("content_type_id"));
-				Info.setTitle(rs.getString("title"));
-				Info.setAddress(rs.getString("addr1"));
-				Info.setAddress2(rs.getString("addr2"));
-				Info.setImgUrl(rs.getString("first_image"));
-				Info.setLatitude(rs.getDouble("latitude"));
-				Info.setLongitude(rs.getDouble("longitude"));
-					
-//				System.out.println(Info);
-				
-				list.add(Info);
-			}
-		} finally {
-			db.close(rs, pstmt, conn);
-		}
-		return list;
-	}
-	
-	// 버튼 누른 것 가져오기
-	public List<SearchInfoDto> getAttrInfo2(String keyword) throws SQLException {
-		List<SearchInfoDto> list = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = db.getConnection();
-			StringBuilder sql = new StringBuilder();
-			sql.append("select sido_code, gugun_code, content_type_id, \n");
-			sql.append("title, addr1, addr2, first_image, latitude, longitude \n");
-			sql.append("from attraction_info \n");
-			sql.append("where (title LIKE '%" + keyword + "%') or (addr1 LIKE '%" + keyword + "%') or (addr2 LIKE '%" + keyword + "%'");
-//			
+//			sql.append("and ((title LIKE '%" + keyword + "%') or (addr1 LIKE '%" + keyword + "%') or (addr2 LIKE '%" + keyword + "%'))");
+			sql.append("and ((title LIKE " + newKey+ ") or (addr1 LIKE "+ newKey + ") or (addr2 LIKE " + newKey+ "))");
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 				
@@ -124,5 +85,41 @@ public class SearchDao {
 		return list;
 	}
 
+	// (추가) 지역명 버튼 눌렀을 때 처리
+	public List<SearchInfoDto> getAttrInfo2(String keyword) throws SQLException {
+		List<SearchInfoDto> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String newKey = "'%" + keyword + "%'";
+		
+		try {
+			conn = db.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select sido_code, gugun_code, content_type_id, \n");
+			sql.append("title, addr1, addr2, first_image, latitude, longitude \n");
+			sql.append("from attraction_info \n");
+			sql.append("where content_type_id=12 and ((addr1 LIKE "+ newKey + ") or addr2 LIKE (" + newKey + "))");
+			pstmt = conn.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+				
+			while(rs.next()) {
+				SearchInfoDto Info = new SearchInfoDto();
+				Info.setSidoCode(rs.getInt("sido_code"));
+				Info.setContentId(rs.getInt("content_type_id"));
+				Info.setTitle(rs.getString("title"));
+				Info.setAddress(rs.getString("addr1"));
+				Info.setAddress2(rs.getString("addr2"));
+				Info.setImgUrl(rs.getString("first_image"));
+				Info.setLatitude(rs.getDouble("latitude"));
+				Info.setLongitude(rs.getDouble("longitude"));
+					
+				list.add(Info);
+			}
+		} finally {
+			db.close(rs, pstmt, conn);
+		}
+		return list;
+	}
 
 }

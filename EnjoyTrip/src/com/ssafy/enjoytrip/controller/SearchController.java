@@ -1,9 +1,7 @@
 package com.ssafy.enjoytrip.controller;
 
 import java.io.IOException;
-
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import com.ssafy.enjoytrip.dao.SearchDao;
 import com.ssafy.enjoytrip.model.SearchInfoDto;
 
-
 @WebServlet("/navigator")
 public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,26 +22,24 @@ public class SearchController extends HttpServlet {
 		searchDao = SearchDao.getTripService();
 	}
 	
+	private void forward(HttpServletRequest request, HttpServletResponse response, String path)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		dispatcher.forward(request, response);
+	}
+	
+	private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+		response.sendRedirect(request.getContextPath() + path);
+	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 	
-	private void forward(HttpServletRequest request, HttpServletResponse response, String path)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
-	}
-
-	private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
-		response.sendRedirect(request.getContextPath() + path);
-	}
-	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		
 		String path = "";
 		// "지역별여행지" 리다이렉션
 		if("searchTrip".equals(action)) {
@@ -52,8 +47,15 @@ public class SearchController extends HttpServlet {
 			forward(request, response, path);
 		} 
 		
+		
 		else if("showmap".equals(action)) {
 			path = showMap(request, response);
+			forward(request, response, path);
+		} 
+
+		// (추가) 버튼 눌렀을 때
+		else if("searchTap".equals(action)) {
+			path = showTap(request, response);
 			forward(request, response, path);
 		} 
 		
@@ -62,7 +64,21 @@ public class SearchController extends HttpServlet {
 		}
 	}
 	
-	
+	// (추가) 버튼 눌렀을 때 관광지 정보 수집
+	private String showTap(HttpServletRequest request, HttpServletResponse response) {
+		String keyword = request.getParameter("keyword");
+		
+		try {
+			List<SearchInfoDto> tripInfo = searchDao.getAttrInfo2(keyword);
+			request.setAttribute("attrinfo", tripInfo);
+			
+			return "/service/search.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/service/search.jsp";
+		}
+	}
+
 	// 선택된 정보를 바탕으로 관광지 정보를 DB에서 수집한다.
 	private String showMap(HttpServletRequest request, HttpServletResponse response) {
 		//HttpSession session = request.getSession();
@@ -70,6 +86,7 @@ public class SearchController extends HttpServlet {
 		int gugun = Integer.parseInt(request.getParameter("gugun"));
 		int type = Integer.parseInt(request.getParameter("type"));
 		String keyword = request.getParameter("keyword");
+		System.out.println(keyword);
 		
 		try {
 			List<SearchInfoDto> tripInfo = searchDao.getAttrInfo(sido, gugun, type, keyword);
