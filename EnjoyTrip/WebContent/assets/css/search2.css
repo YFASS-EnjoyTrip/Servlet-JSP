@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  font-family: "TheJamsil5Bold";
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.row {
+  display: flex;
+}
+
+#search-title {
+  color: #9cdce4;
+  font-size: 40px;
+}
+
+#search-sub {
+  font-size: 40px;
+}
+.card-img-top {
+  height: 400px;
+}
+
+.card-body {
+  height: 100px;
+}
+
+.card {
+  width: 300px;
+  height: 400px;
+  box-shadow: 0px 0px 10px 3px gray;
+}
+
+.card-hov {
+  overflow: hidden;
+}
+
+.card img {
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover img {
+  transform: scale(1.2);
+}
+
+.card-title {
+  font-size: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card-text {
+  font-size: 15px;
+}
+
+#map {
+  border-radius: 5px 5px 5px 5px;
+  /* border: solid 1px gray ; */
+  width: 950px;
+  height: 400px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  z-index: 0;
+}
+
+.alert {
+  background-color: white;
+  border: 0;
+  color: black;
+}
+
+.area-name {
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  border: none;
+}
+
+.area-name button {
+  border: none;
+  color: black;
+}
+
+.btn {
+  color: black;
+  border: 1px solid gray;
+}
+
+#btn-search {
+  width: 200px;
+}

@@ -1,0 +1,19 @@
+.footer-nav {
+  width: 1903px;
+  height: 200px;
+  background-color: rgba(80, 80, 80, 0.1);
+  padding-top: 50px;
+  font-size: 12px;
+}
+
+.footer-item1 {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-item2 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}

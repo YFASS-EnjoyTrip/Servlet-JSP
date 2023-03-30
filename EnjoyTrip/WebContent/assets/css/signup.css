@@ -1,0 +1,77 @@
+#signup-modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: none;
+}
+
+#signup-modalBody {
+  width: 320px;
+  padding: 30px 30px;
+  margin: 100px auto;
+  background-color: white;
+  border-radius: 20px;
+}
+
+#signup-title > h1 {
+	font-size: 32px;
+}
+
+.form-label {
+	display : inline-block;
+	width:200px;
+	margin-top: 10px;
+}
+
+.login-value, .signup-value {
+  height: 30px;
+  border-radius: 5px;
+  width: 260px;
+  text-indent: 10px;
+ 
+  margin-top: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+}
+
+.text-ok {
+	color : #87ceeb;
+}
+
+.text-danger {
+	color : #da8383;
+}
+
+#signup-info {
+  margin-top: 25px;
+}
+
+#signup-title {
+  display: flex;
+}
+
+#signup-modal-close {
+  margin-left: 120px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#signup-submit {
+  width: 200px;
+  height: 40px;
+	
+  margin-top: 30px;
+  margin-left: 30px;
+  background-color: #9cdce4;
+  border: #9cdce4;
+  border-radius: 10px;
+
+  cursor: pointer;
+}
