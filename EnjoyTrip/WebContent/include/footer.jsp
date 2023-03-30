@@ -23,59 +23,76 @@
 <script type="module" src="${commonJs}/main.js"></script>
 
 <script>
-  //시 정보 선택 시 발생하는 구군 항목 업데이트
-	document.querySelector("#search-city").addEventListener("change", function () {
-	  	   let seleted_code = this[this.selectedIndex].value;
-	  	   if (seleted_code) {
-	  	       getRegionDetail(seleted_code);
-	  	   }
-	  });
+//시 정보 선택 시 발생하는 구군 항목 업데이트
+document.querySelector("#search-city").addEventListener("change", function () {
+  	   let seleted_code = this[this.selectedIndex].value;
+  	   if (seleted_code) {
+  	       getRegionDetail(seleted_code);
+  	   }
+  });
 
-	// "도시" 정보를 선택하면 이벤트로 발생하는 "지역구" 정보 가져오기
-	function getRegionDetail(data) {
-		let Region_Code_T10_2 = "https://apis.data.go.kr/B551011/KorService1/areaCode1?"
-          	+ "serviceKey=${serviceKey}"
-          	+ "&numOfRows=100"
-          	+ "&MobileOS=ETC"
-          	+ "&MobileApp=AppTest"
-          	+ "&_type=json"
-          	+ "&areaCode=" + data;
+// "도시" 정보를 선택하면 이벤트로 발생하는 "지역구" 정보 가져오기
+function getRegionDetail(data) {
+	let Region_Code_T10_2 = "https://apis.data.go.kr/B551011/KorService1/areaCode1?"
+      	+ "serviceKey=${serviceKey}"
+      	+ "&numOfRows=100"
+      	+ "&MobileOS=ETC"
+      	+ "&MobileApp=AppTest"
+      	+ "&_type=json"
+      	+ "&areaCode=" + data;
 
-      	fetch(Region_Code_T10_2).then((response) => response.json())
-          .then((text) => {
-              let RDetails = text.response.body.items.item;
-              let TagSet = "";
-              let Select_div = document.querySelector("#search-gugun");
+  	fetch(Region_Code_T10_2).then((response) => response.json())
+      .then((text) => {
+          let RDetails = text.response.body.items.item;
+          let TagSet = "";
+          let Select_div = document.querySelector("#search-gugun");
 
-              if (RDetails) {
-                  RDetails.forEach(function (city) {
-                      let Rcode = city.code;
-                      let Rname = city.name;
+          if (RDetails) {
+              RDetails.forEach(function (city) {
+                  let Rcode = city.code;
+                  let Rname = city.name;
 
-                      TagSet += "<option value=" + Rcode + ">" + Rname + "</option>";
-                  });
-              }
-              Select_div.innerHTML = TagSet;
-          });
-  	}
-  	  
-  
-    // 관광지 정보 가져오기 이벤트 ("검색" 버튼 이벤트) --> DB select 조건에 필요한 매개변수 담아서 던짐.
-    document.getElementById("btn-search").addEventListener("click", () => {
-    	
-    	let sidoCode = document.querySelector("#search-city").value;
-    	let gugunCode = document.querySelector("#search-gugun").value;
-    	let typeCode = document.querySelector("#search-content-id").value;
-      	let form = document.querySelector("#form-search");
-      	let keyword = document.querySelector("#search-keyword").value;
-      	
-        form.setAttribute("action", "${root}/navigator?action=showmap&sido="+sidoCode+"&gugun="+gugunCode+"&type="+typeCode+"&keyword="+keyword);
+                  TagSet += "<option value=" + Rcode + ">" + Rname + "</option>";
+              });
+          }
+          Select_div.innerHTML = TagSet;
+      });
+	}
+
+// 관광지 정보 가져오기 이벤트 ("검색" 버튼 이벤트) --> DB select 조건에 필요한 매개변수 담아서 던짐.
+// (추가) keyword가 null일 때 alert 처리
+document.getElementById("btn-search").addEventListener("click", () => {
+	
+	let sidoCode = document.querySelector("#search-city").value;
+	let gugunCode = document.querySelector("#search-gugun").value;
+	let typeCode = document.querySelector("#search-content-id").value;
+  	let form = document.querySelector("#form-search");
+  	let keyword = document.querySelector("#search-keyword").value;
+  	if (!keyword) {
+  	    alert("검색할 키워드를 적어주세요");
+  	    return;
+    } else {
+        form.setAttribute("action", "${root}/navigator?action=searchTap&sido="+sidoCode+"&gugun="+gugunCode+"&type="+typeCode+"&keyword="+keyword);
         form.submit();
-    });
-    	
-    function moveCenter(lat, lng) {
-      map.setCenter(new kakao.maps.LatLng(lat, lng));
     }
+  	
+});
+
+// (추가) 지역명 버튼 클릭시 가져오기
+let fastbtns = document.getElementsByClassName("btn-outline-primary");
+for (let fb of fastbtns) {
+  fb.addEventListener("click", () => {
+    let keyword = fb.id;
+    let form = document.querySelector("#Tap-search");
+    form.setAttribute("action", "${root}/navigator?action=searchTap&keyword="+keyword);
+    form.submit();
+  });
+} 
+
+
+function moveCenter(lat, lng) {
+  map.setCenter(new kakao.maps.LatLng(lat, lng));
+}
     </script>
 </body>
 </html>

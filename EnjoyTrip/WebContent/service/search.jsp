@@ -52,24 +52,24 @@
 				<button id="btn-search" class="btn btn-outline-success"
 					type="button">검색</button>
 			</form>
-			<form class="area-body">
-				<div class="area-name">
-					<button type="button" id="서울" class="btn btn-outline-primary">서울</button>
-					<button type="button" id="인천" class="btn btn-outline-primary">인천</button>
-					<button type="button" id="대전" class="btn btn-outline-primary">대전</button>
-					<button type="button" id="대구" class="btn btn-outline-primary">대구</button>
-					<button type="button" id="광주" class="btn btn-outline-primary">광주</button>
-					<button type="button" id="부산" class="btn btn-outline-primary">부산</button>
-					<button type="button" id="울산" class="btn btn-outline-primary">울산</button>
-					<button type="button" id="경기도" class="btn btn-outline-primary">경기도</button>
-					<button type="button" id="강원도" class="btn btn-outline-primary">강원도</button>
-					<button type="button" id="충청도" class="btn btn-outline-primary">충청도</button>
-					<button type="button" id="경상도" class="btn btn-outline-primary">경상도</button>
-					<button type="button" id="전라도" class="btn btn-outline-primary">전라도</button>
-					<button type="button" id="제주도" class="btn btn-outline-primary">제주도</button>
-				</div>
-			</form>
-
+			
+			<form class="area-body" id="Tap-search" method="POST" action="searchTap">
+			          <div class="area-name">
+			            <button type="button" id="서울" class="btn btn-outline-primary">서울</button>
+			            <button type="button" id="인천" class="btn btn-outline-primary">인천</button>
+			            <button type="button" id="대전" class="btn btn-outline-primary">대전</button>
+			            <button type="button" id="대구" class="btn btn-outline-primary">대구</button>
+			            <button type="button" id="광주" class="btn btn-outline-primary">광주</button>
+			            <button type="button" id="부산" class="btn btn-outline-primary">부산</button>
+			            <button type="button" id="울산" class="btn btn-outline-primary">울산</button>
+			            <button type="button" id="경기" class="btn btn-outline-primary">경기도</button>
+			            <button type="button" id="강원" class="btn btn-outline-primary">강원도</button>
+			            <button type="button" id="충청" class="btn btn-outline-primary">충청도</button>
+			            <button type="button" id="경상" class="btn btn-outline-primary">경상도</button>
+			            <button type="button" id="전라" class="btn btn-outline-primary">전라도</button>
+			            <button type="button" id="제주" class="btn btn-outline-primary">제주도</button>
+			          </div>
+			        </form>
 
 
 			<!-- kakaoMap API  start  -->
