@@ -72,7 +72,7 @@ document.getElementById("btn-search").addEventListener("click", () => {
   	    alert("검색할 키워드를 적어주세요");
   	    return;
     } else {
-        form.setAttribute("action", "${root}/navigator?action=searchTap&sido="+sidoCode+"&gugun="+gugunCode+"&type="+typeCode+"&keyword="+keyword);
+        form.setAttribute("action", "${root}/navigator?action=showmap&sido="+sidoCode+"&gugun="+gugunCode+"&type="+typeCode+"&keyword="+keyword);
         form.submit();
     }
   	
